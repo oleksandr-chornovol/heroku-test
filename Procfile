@@ -1,1 +1,1 @@
-web: bin/heroku-test/cmd/hello-world
+web: heroku-test/cmd/hello-world
