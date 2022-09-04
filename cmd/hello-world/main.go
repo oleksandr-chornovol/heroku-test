@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -15,7 +16,7 @@ func main() {
 		})
 	})
 
-	err := engine.Run(":8080")
+	err := engine.Run(":" + os.Getenv("PORT"))
 	if err != nil {
 		log.Println(err)
 	}
