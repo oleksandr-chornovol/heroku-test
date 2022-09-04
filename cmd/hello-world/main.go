@@ -20,7 +20,7 @@ func main() {
 		log.Println(err)
 	}
 
-	go s.StartBlocking()
+	s.StartAsync()
 
 	engine := gin.Default()
 
