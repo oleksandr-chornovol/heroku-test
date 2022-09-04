@@ -1,13 +1,27 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/go-co-op/gocron"
 	"log"
 	"net/http"
 	"os"
+	"time"
 )
 
 func main() {
+	s := gocron.NewScheduler(time.UTC)
+
+	_, err := s.Every(5).Seconds().Do(func() {
+		fmt.Println("Hello from scheduler!")
+	})
+	if err != nil {
+		log.Println(err)
+	}
+
+	go s.StartBlocking()
+
 	engine := gin.Default()
 
 	engine.GET("/", func(c *gin.Context) {
@@ -16,7 +30,7 @@ func main() {
 		})
 	})
 
-	err := engine.Run(":" + os.Getenv("PORT"))
+	err = engine.Run(":" + os.Getenv("PORT"))
 	if err != nil {
 		log.Println(err)
 	}
