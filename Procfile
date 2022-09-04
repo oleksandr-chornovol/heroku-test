@@ -1,1 +1,1 @@
-web: heroku-test
+web: hello-world -port $PORT
